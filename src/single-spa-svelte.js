@@ -1,3 +1,5 @@
+import { mount as mountSvelte } from "svelte";
+
 const defaultOpts = {
   // required opts
   component: null,
@@ -49,8 +51,8 @@ function mount(opts, mountedInstances, singleSpaProps) {
   return Promise.resolve().then(() => {
     const domElementGetter = chooseDomElementGetter(opts, singleSpaProps);
     const domElement = domElementGetter();
-    // See https://svelte.dev/docs#Creating_a_component
-    mountedInstances.instance = new opts.component({
+    // See https://svelte.dev/docs/svelte/v5-migration-guide#Components-are-no-longer-classes
+    mountedInstances.instance = mountSvelte(opts.component, {
       ...svelteOpts,
       target: domElement,
       props: Object.assign({}, singleSpaProps, opts.props),
@@ -91,7 +93,7 @@ function defaultDomElementGetter(props) {
   const appName = props.appName || props.name;
   if (!appName) {
     throw Error(
-      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`
+      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`,
     );
   }
   const htmlId = `single-spa-application:${appName}`;
