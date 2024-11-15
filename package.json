@@ -1,5 +1,5 @@
 {
-  "name": "@ukasyah-dev/single-spa-svelte",
+  "name": "@ukasyah/single-spa-svelte",
   "version": "2.1.1",
   "description": "a single-spa plugin for svelte applications",
   "main": "lib/single-spa-svelte.js",
